@@ -35,7 +35,7 @@ group by pais.nombre;
 
 --como la pregunta no especifica, entonces: interprete que canta las dos canciones (y)--
 
-select distinct interprete.nombre as interprete
+select interprete.nombre as interprete
 from interprete
 inner join interpretacion on interprete.id = interpretacion.idinterprete
 inner join cancion on interpretacion.idcancion = cancion.id
@@ -45,12 +45,12 @@ having count(distinct cancion.titulo) = 2;
 
 --interprete que canta aunque sea una sola cancion (o)--
 
-select distinct interprete.nombre as interprete
+select interprete.nombre as interprete
 from interprete
 inner join interpretacion on interprete.id = interpretacion.idinterprete
 inner join cancion on interpretacion.idcancion = cancion.id
-where cancion.titulo in ( 'Candilejas' , 'Malaguena');
-
+where cancion.titulo in ( 'Candilejas' , 'Malaguena')
+group by interprete.id , interprete.nombre;
 
 select interprete.nombre as artista,
 (select count ( cancioncompositor.idcancion)
